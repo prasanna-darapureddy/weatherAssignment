@@ -48,10 +48,8 @@ const Home = () => {
 
   const getCurrentLatLong = () => {
     const postions = (position) => {
-      const latStr =
-        position.coords.latitude && position.coords.latitude.toString();
-      const lngStr =
-        position.coords.longitude && position.coords.longitude.toString();
+      const latStr = position?.coords?.latitude?.toString();
+      const lngStr = position?.coords?.longitude?.toString();
       const index = latStr.lastIndexOf(".");
       const formatLat = latStr.slice(0, index + 5);
       const formatLong = lngStr.slice(0, index + 5);
@@ -121,7 +119,7 @@ const Home = () => {
     return (
       <div className={isLightMode ? "light-failed-card" : "dark-failed-card"}>
         <ImNotification fontSize={50} />
-        <p className="wrong-text">!Oops somthing went wrong</p>
+        <p className="wrong-text">No Data Found</p>
       </div>
     );
   };
@@ -143,10 +141,19 @@ const Home = () => {
               isLightMode ? "light-res-card " : "dark-res-card "
             }`}
           >
-            <h2 className="city">{searchRes && searchRes.name}</h2>
+             <h3
+              className={`current-heading ${
+                isLightMode ? "light-current-heading" : "dark-current-heading"
+              }`}
+            >
+              Search Location
+            </h3>
+            <div className="current-child-box">
+              <p className="city-name">City Name : </p>
+              <span className="city-name">{searchRes.name}</span>
+            </div>
             <ul className="weather-box">
-              {searchRes &&
-                searchRes.weather.map((each, index) => (
+              {searchRes?.weather?.map((each, index) => (
                   <li
                     key={index + "main"}
                     className={
